@@ -40,7 +40,7 @@ The following animation demonstrates the application functionality:
 
 ![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over.](.\04-web-apis-homework-demo.gif)
 
-## Grading Requirements
+<!-- ## Grading Requirements
 
 This homework is graded based on the following criteria: 
 
@@ -89,3 +89,4 @@ You are required to submit BOTH of the following for review:
 ---
 
 © 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+ -->
