@@ -2,6 +2,22 @@
 
 # 04 Web APIs: Code Quiz
 
+## Logic
+
+1. On page load, show title, description, and button to start game. 
+1. On start game button click, remove all elements from page, generate new elements, start timer. 
+1. 
+
+
+1. Click start button
+1. Timer starts, question and options shown
+1. After button click, show next question and buttons regardless of choice
+    1. Display correct/incorrect at bottom for 2 seconds
+    1. If incorrect, -10 seconds to time
+1. If all questions are answered, or if time = 0
+1. Show end screen with form and input
+
+
 ## Your Task
 
 At some point in your journey to become a full-stack web developer, you’ll likely be asked to complete a coding assessment&mdash;perhaps as part of an interview process. A typical coding assessment includes both multiple-choice questions and interactive coding challenges. 
@@ -40,7 +56,7 @@ The following animation demonstrates the application functionality:
 
 ![A user clicks through an interactive coding quiz, then enters initials to save the high score before resetting and starting over.](.\04-web-apis-homework-demo.gif)
 
-## Grading Requirements
+<!-- ## Grading Requirements
 
 This homework is graded based on the following criteria: 
 
@@ -88,4 +104,4 @@ You are required to submit BOTH of the following for review:
 
 ---
 
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved. -->
