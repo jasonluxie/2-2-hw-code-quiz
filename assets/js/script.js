@@ -1,11 +1,43 @@
+function gameTimer() {
+    let time = 6 * 30000;
+    //Timer function
+    setInterval(function () {
+        if (time > 0) {
+            time = time - 1000;
+            let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((time % (1000 * 60)) / 1000);
+            timer.textContent = minutes + ":" + seconds;
+        }
+        if (time <= 0) {
+            let tryAgain = confirm(
+                "Sorry, you ran out of time! Do you want to play again?"
+            );
+            if (tryAgain == true) {
+                time = wordArray.length * 30000;
+            }
+        }
+    }, 1000);
+}
+
+function startGame() {}
+
+function nextQuestion() {}
+function viewScores() {}
+function playAgain() {}
+
+console.log(quizQuestions);
+
+
 const viewScore = document.querySelector("#view-score");
 const timer = document.querySelector("#timer");
 const quizBox = document.querySelector("#quiz-box");
-
+const startGame = document.querySelector("#start-game")
 const hint = document.querySelector("#hint");
 const choiceBox = document.querySelector("#choice-box");
+const choiceOne = document.querySelector(".choice-1")
+const choiceOne = document.querySelector(".choice-2")
+const choiceOne = document.querySelector(".choice-3")
 const feedback = document.querySelector("#feedback");
-
 const quizQuestions = {
     variable: {
         question:
@@ -48,39 +80,3 @@ const quizQuestions = {
         answer: "c",
     },
 };
-console.log(quizQuestions);
-
-function gameTimer() {
-    let time = 6 * 30000;
-    //Timer function
-    setInterval(function () {
-        if (time > 0) {
-            time = time - 1000;
-            let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
-            let seconds = Math.floor((time % (1000 * 60)) / 1000);
-            timer.textContent = minutes + ":" + seconds;
-        }
-        if (time <= 0) {
-            let tryAgain = confirm(
-                "Sorry, you ran out of time! Do you want to play again?"
-            );
-            if (tryAgain == true) {
-                time = wordArray.length * 30000;
-            }
-        }
-    }, 1000);
-}
-
-function startGame() {}
-
-function nextQuestion() {
-    const QUESTIONS = [];
-    quizQuestions.forEach((activeQuest, activeNum) => {
-        const answers = [];
-        for (letter in activeQuest.options) {
-            options.push(<button></button>);
-        }
-    });
-}
-function viewScores() {}
-function playAgain() {}
