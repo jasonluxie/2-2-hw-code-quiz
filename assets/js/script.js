@@ -8,7 +8,9 @@ const choiceBox = document.querySelector("#choice-box");
 let userChoice;
 let questNumber = -1;
 const feedback = document.querySelector("#feedback");
-let score = 0;
+let score;
+let time = 120000;
+let tryAgainStatus = false;
 const quizQuestions = [
     {
         question:
@@ -63,40 +65,48 @@ function bananaLog() {
 function startGame() {
     title.remove();
     startGameButton.remove();
-    // console.log("banana");
-    // gameTimer()
+    gameTimer();
     nextQuestion();
 }
 
 function nextQuestion() {
-    let userChoices = document.querySelector("#choice");
+    if (tryAgainStatus == true) {
+        // // const title = quizBox.createElement("h1");
+        // // const startGameButton = quizBox.createElement("button");
+        // title.textContent = "Javascript Code Quiz";
+        // startGameButton.textContent = "Start Game";
+        // startGameButton.setAttribute("id", "start-game");
+        // const startGameButton = document.getElementById("start-game");
+        // startGameButton.addEventListener("click", startGame);
+    }
     if (choiceBox.childElementCount > 0) {
-        do {
-            choiceBox.innerHTML = "";
-            console.log("banana");
-        } while (choiceBox.childElementCount >= 3);
+        choiceBox.innerHTML = "";
+        console.log("banana");
+    }
+    if (questNumber + 1 === quizQuestions.length) {
+        choiceBox.innerHTML = "";
+        hint.textContent =
+            "You have finished taking the quiz and have a score of " + score;
+        let playAgain = document.createElement("button");
+        choiceBox.appendChild(playAgain);
+        playAgain.textContent = "Play Again";
     }
     questNumber++;
-    hint.textContent = quizQuestions[questNumber].question;
-    for (let i = 0; i < quizQuestions[questNumber].options.length; i++) {
-        let userChoices = document.createElement("button");
-        choiceBox.appendChild(userChoices);
-        userChoices.setAttribute("id", "choice");
-        userChoices.textContent = quizQuestions[questNumber].options[i];
-        userChoices.addEventListener("click", nextQuestion);
-
-        if (questNumber + 2 === quizQuestions.length) {
-            choiceBox.removeChild(userChoices);
-            console.log("banana");
+    if (questNumber <= quizQuestions.length - 1) {
+        for (let i = 0; i < quizQuestions[questNumber].options.length; i++) {
+            hint.textContent = quizQuestions[questNumber].question;
+            let userChoices = document.createElement("button");
+            choiceBox.appendChild(userChoices);
+            userChoices.setAttribute("id", "choice");
+            userChoices.textContent = quizQuestions[questNumber].options[i];
+            userChoices.addEventListener("click", nextQuestion);
         }
     }
-    console.log(questNumber);
 }
 
 function viewScores() {}
 
 function gameTimer() {
-    let time = 6 * 30000;
     //Timer function
     setInterval(function () {
         if (time > 0) {
@@ -110,7 +120,9 @@ function gameTimer() {
                 "Sorry, you ran out of time! Do you want to play again?"
             );
             if (tryAgain == true) {
-                time = wordArray.length * 30000;
+                time = 120000;
+                tryAgainStatus = true;
+                nextQuestion();
             }
         }
     }, 1000);
