@@ -22,34 +22,34 @@ const quizQuestions = [
         options: ["a: keydown", "b: iteration", "c: getElementById()"],
         answer: "function",
     },
-    // {
-    //     question:
-    //         'This method returns the first element within the HTML document which matches the specified selector',
-    //     options: [ 'a: slice()', 'b: querySelector()', 'c: concat()' ],
-    //     answer: 'querySelector()',
-    // },
-    // {
-    //     question:
-    //         '____ is a concept which helps us manage the visibilty of variables in a javascript file',
-    //     options: [ 'a: scope', 'b: global', 'c: constant' ],
-    //     answer: 'scope',
-    // },
-    // {
-    //     question:
-    //         'A data representation of the objects which make up the content of an HTML document',
-    //     options: [
-    //         'a: Document Object Model (DOM)',
-    //         'b: local storage',
-    //         'c: function',
-    //     ],
-    //     answer: 'Document Object Model (DOM)',
-    // },
-    // {
-    //     question:
-    //         'This class is used to store keyed data and complex entities in javascript',
-    //     options: [ 'a: constant', 'b: variable', 'c: object' ],
-    //     answer: 'c',
-    // },
+    {
+        question:
+            "This method returns the first element within the HTML document which matches the specified selector",
+        options: ["a: slice()", "b: querySelector()", "c: concat()"],
+        answer: "querySelector()",
+    },
+    {
+        question:
+            "____ is a concept which helps us manage the visibilty of variables in a javascript file",
+        options: ["a: scope", "b: global", "c: constant"],
+        answer: "scope",
+    },
+    {
+        question:
+            "A data representation of the objects which make up the content of an HTML document",
+        options: [
+            "a: Document Object Model (DOM)",
+            "b: local storage",
+            "c: function",
+        ],
+        answer: "Document Object Model (DOM)",
+    },
+    {
+        question:
+            "This class is used to store keyed data and complex entities in javascript",
+        options: ["a: constant", "b: variable", "c: object"],
+        answer: "c",
+    },
 ];
 
 startGameButton.addEventListener("click", startGame);
@@ -69,19 +69,28 @@ function startGame() {
 }
 
 function nextQuestion() {
+    let userChoices = document.querySelector("#choice");
+    if (choiceBox.childElementCount > 0) {
+        do {
+            choiceBox.innerHTML = "";
+            console.log("banana");
+        } while (choiceBox.childElementCount >= 3);
+    }
     questNumber++;
     hint.textContent = quizQuestions[questNumber].question;
     for (let i = 0; i < quizQuestions[questNumber].options.length; i++) {
         let userChoices = document.createElement("button");
         choiceBox.appendChild(userChoices);
-        userChoices.setAttribute("id", "choice" + [i + 1]);
+        userChoices.setAttribute("id", "choice");
         userChoices.textContent = quizQuestions[questNumber].options[i];
         userChoices.addEventListener("click", nextQuestion);
-        if (choiceBox.childElementCount > 3) {
+
+        if (questNumber + 2 === quizQuestions.length) {
             choiceBox.removeChild(userChoices);
-            console.log(choiceBox);
+            console.log("banana");
         }
     }
+    console.log(questNumber);
 }
 
 function viewScores() {}
