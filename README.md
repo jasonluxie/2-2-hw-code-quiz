@@ -4,9 +4,12 @@
 
 ## Logic
 
-1. On page load, show title, description, and button to start game. 
-1. On start game button click, remove all elements from page, generate new elements, start timer. 
-1. 
+1. On page load, show title, <p>description, and button to start game. 
+1. On start game button click:
+    1. Remove title element
+    1. Remove start button
+    1. Set textContent of <p> element to description of question.
+1. Change class of buttons so that they're showing 
 
 
 1. Click start button
