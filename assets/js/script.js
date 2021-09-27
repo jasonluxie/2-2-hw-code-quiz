@@ -82,9 +82,7 @@ function gameTimer() {
                 "Sorry, you ran out of time! Do you want to play again?"
             );
             if (tryAgain == true) {
-                time = 120000;
-                tryAgainStatus = true;
-                nextQuestion();
+                location.reload();
             }
         }
     }, 1000);
@@ -103,9 +101,12 @@ function nextQuestion() {
     //     // startGameButton.setAttribute("id", "start-game");
     //     // const startGameButton = document.getElementById("start-game");
     //     // startGameButton.addEventListener("click", startGame);} else
+
+    //If there are buttons in the container, changes the container into an empty string.
     if (choiceBox.childElementCount > 0) {
         choiceBox.innerHTML = "";
     }
+    //If the array index number is the same as the
     if (questNumber + 1 === quizQuestions.length) {
         choiceBox.innerHTML = "";
         hint.textContent =
@@ -125,34 +126,49 @@ function nextQuestion() {
             hint.textContent = quizQuestions[questNumber].question;
             let userChoices = document.createElement("button");
             choiceBox.appendChild(userChoices);
-            userChoices.setAttribute("id", "choice" + [i + 1]);
+            userChoices.setAttribute("id", "choice");
+            // userChoices.setAttribute("id", "choice" + [i + 1]);
             userChoices.textContent = quizQuestions[questNumber].options[i];
-            userChoices.addEventListener("click", scoring);
+            // userChoices.addEventListener("click", scoring);
             userChoices.addEventListener("click", nextQuestion);
         }
     }
 }
 
-function scoring() {
-    let a = document.getElementById("choice1");
-    let b = document.getElementById("choice2");
-    let c = document.getElementById("choice3");
-    a.addEventListener("click", function () {
-        userSelection = a.textContent;
-        console.log(userSelection);
-    });
-    b.addEventListener("click", function () {
-        userSelection = b.textContent;
-        console.log(userSelection);
-    });
-    c.addEventListener("click", function () {
-        userSelection = c.textContent;
-        console.log(userSelection);
-    });
-    if (userSelection == quizQuestions[questNumber].answer) {
-        feedback.textContent = "Correct!";
+choiceBox.addEventListener("click", function (event) {
+    let userClick = event.target;
+    console.log(event.target);
+    if (userClick.textContent == quizQuestions[questNumber-1].answer) {
+        feedback.textContent = "Correct!"
+        return;
     } else {
-        score = score - 10;
-        feedback.textContent = "Incorrect!";
+        feedback.textContent = "Incorrect!"
+        time = time - 10000;
     }
-}
+    console.log(userClick);
+});
+
+// function scoring() {
+//Add delegation
+// let a = document.getElementById("choice1");
+// let b = document.getElementById("choice2");
+// let c = document.getElementById("choice3");
+// a.addEventListener("click", function () {
+//     userSelection = a.textContent;
+//     console.log(userSelection);
+// });
+// b.addEventListener("click", function () {
+//     userSelection = b.textContent;
+//     console.log(userSelection);
+// });
+// c.addEventListener("click", function () {
+//     userSelection = c.textContent;
+//     console.log(userSelection);
+// });
+// if (userSelection == quizQuestions[questNumber].answer) {
+//     feedback.textContent = "Correct!";
+// } else {
+//     score = score - 10;
+//     feedback.textContent = "Incorrect!";
+// }
+// }
