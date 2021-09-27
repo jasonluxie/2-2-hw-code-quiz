@@ -6,8 +6,22 @@
     visibility: visible;
 }
 
+header {
+    display: flex;
+    flex-direction: row;
+}
+
 #quiz-box {
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#choice-box {
+    display:flex;
+    flex-direction: column;
+}
+
+form {
+    margin-top: 1rem;
 }

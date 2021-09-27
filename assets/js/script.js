@@ -5,6 +5,7 @@ const title = document.querySelector("#title");
 const hint = document.querySelector("#question");
 const startGameButton = document.getElementById("start-game");
 const choiceBox = document.querySelector("#choice-box");
+const form = document.querySelector("form")
 let userChoice;
 let userSelection;
 let questNumber = -1;
@@ -99,17 +100,20 @@ function nextQuestion() {
     if (questNumber + 1 === quizQuestions.length) {
         score = time / 1000;
         choiceBox.innerHTML = "";
+        title.className = "visible";
+        title.textContent = "All Done!";
         hint.textContent =
             "You have finished taking the quiz and have a score of " + score;
-        let playAgain = document.createElement("button");
-        choiceBox.appendChild(playAgain);
-        playAgain.textContent = "Play Again";
-        tryAgainStatus = true;
+        form.className = "visible"
+        // let playAgain = document.createElement("button");
+        // choiceBox.appendChild(playAgain);
+        // playAgain.textContent = "Play Again";
+        // tryAgainStatus = true;
         // clearInterval(gameTimer)
         // playAgain.addEventListener("click", nextQuestion);
-        playAgain.addEventListener("click", function () {
-            location.reload();
-        });
+        // playAgain.addEventListener("click", function () {
+        //     location.reload();
+        // });
     }
     questNumber++;
     if (questNumber <= quizQuestions.length - 1) {
