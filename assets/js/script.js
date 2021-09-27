@@ -6,6 +6,7 @@ const hint = document.querySelector("#question");
 const startGameButton = document.getElementById("start-game");
 const choiceBox = document.querySelector("#choice-box");
 let userChoice;
+let userSelection;
 let questNumber = -1;
 const feedback = document.querySelector("#feedback");
 let score;
@@ -16,25 +17,25 @@ const quizQuestions = [
         question:
             "This is a named reference to any value in javascript; It is a container for data",
         options: ["a: variable", "b: querySelector()", "c: function"],
-        answer: "variable",
+        answer: "a: variable",
     },
     {
         question:
             "A ________ is a set of statements which performs a task or calculates a value",
-        options: ["a: keydown", "b: iteration", "c: getElementById()"],
-        answer: "function",
+        options: ["a: keydown", "b: iteration", "c: function"],
+        answer: "c: function",
     },
     {
         question:
             "This method returns the first element within the HTML document which matches the specified selector",
         options: ["a: slice()", "b: querySelector()", "c: concat()"],
-        answer: "querySelector()",
+        answer: "b: querySelector()",
     },
     {
         question:
             "____ is a concept which helps us manage the visibilty of variables in a javascript file",
         options: ["a: scope", "b: global", "c: constant"],
-        answer: "scope",
+        answer: "a: scope",
     },
     {
         question:
@@ -44,67 +45,28 @@ const quizQuestions = [
             "b: local storage",
             "c: function",
         ],
-        answer: "Document Object Model (DOM)",
+        answer: "a: Document Object Model (DOM)",
     },
     {
         question:
             "This class is used to store keyed data and complex entities in javascript",
         options: ["a: constant", "b: variable", "c: object"],
-        answer: "c",
+        answer: "c: object",
     },
 ];
 
 startGameButton.addEventListener("click", startGame);
 
 function bananaLog() {
-    questNumber++;
-    console.log(questNumber);
     return console.log("banana");
 }
 
 function startGame() {
-    title.remove();
-    startGameButton.remove();
+    title.className = "hidden";
+    startGameButton.className = "hidden";
     gameTimer();
     nextQuestion();
 }
-
-function nextQuestion() {
-    if (tryAgainStatus == true) {
-        // // const title = quizBox.createElement("h1");
-        // // const startGameButton = quizBox.createElement("button");
-        // title.textContent = "Javascript Code Quiz";
-        // startGameButton.textContent = "Start Game";
-        // startGameButton.setAttribute("id", "start-game");
-        // const startGameButton = document.getElementById("start-game");
-        // startGameButton.addEventListener("click", startGame);
-    }
-    if (choiceBox.childElementCount > 0) {
-        choiceBox.innerHTML = "";
-        console.log("banana");
-    }
-    if (questNumber + 1 === quizQuestions.length) {
-        choiceBox.innerHTML = "";
-        hint.textContent =
-            "You have finished taking the quiz and have a score of " + score;
-        let playAgain = document.createElement("button");
-        choiceBox.appendChild(playAgain);
-        playAgain.textContent = "Play Again";
-    }
-    questNumber++;
-    if (questNumber <= quizQuestions.length - 1) {
-        for (let i = 0; i < quizQuestions[questNumber].options.length; i++) {
-            hint.textContent = quizQuestions[questNumber].question;
-            let userChoices = document.createElement("button");
-            choiceBox.appendChild(userChoices);
-            userChoices.setAttribute("id", "choice");
-            userChoices.textContent = quizQuestions[questNumber].options[i];
-            userChoices.addEventListener("click", nextQuestion);
-        }
-    }
-}
-
-function viewScores() {}
 
 function gameTimer() {
     //Timer function
@@ -126,4 +88,71 @@ function gameTimer() {
             }
         }
     }, 1000);
+}
+
+function nextQuestion() {
+    // if (tryAgainStatus == true) {
+    //     title.className = "visible";
+    //     startGameButton.className = "visible";
+    //     questNumber = -1;
+    //     tryAgainStatus = false;
+    //     // // const title = quizBox.createElement("h1");
+    //     // // const startGameButton = quizBox.createElement("button");
+    //     // title.textContent = "Javascript Code Quiz";
+    //     // startGameButton.textContent = "Start Game";
+    //     // startGameButton.setAttribute("id", "start-game");
+    //     // const startGameButton = document.getElementById("start-game");
+    //     // startGameButton.addEventListener("click", startGame);} else
+    if (choiceBox.childElementCount > 0) {
+        choiceBox.innerHTML = "";
+    }
+    if (questNumber + 1 === quizQuestions.length) {
+        choiceBox.innerHTML = "";
+        hint.textContent =
+            "You have finished taking the quiz and have a score of " + score;
+        let playAgain = document.createElement("button");
+        choiceBox.appendChild(playAgain);
+        playAgain.textContent = "Play Again";
+        tryAgainStatus = true;
+        // playAgain.addEventListener("click", nextQuestion);
+        playAgain.addEventListener("click", function () {
+            location.reload();
+        });
+    }
+    questNumber++;
+    if (questNumber <= quizQuestions.length - 1) {
+        for (let i = 0; i < quizQuestions[questNumber].options.length; i++) {
+            hint.textContent = quizQuestions[questNumber].question;
+            let userChoices = document.createElement("button");
+            choiceBox.appendChild(userChoices);
+            userChoices.setAttribute("id", "choice" + [i + 1]);
+            userChoices.textContent = quizQuestions[questNumber].options[i];
+            userChoices.addEventListener("click", scoring);
+            userChoices.addEventListener("click", nextQuestion);
+        }
+    }
+}
+
+function scoring() {
+    let a = document.getElementById("choice1");
+    let b = document.getElementById("choice2");
+    let c = document.getElementById("choice3");
+    a.addEventListener("click", function () {
+        userSelection = a.textContent;
+        console.log(userSelection);
+    });
+    b.addEventListener("click", function () {
+        userSelection = b.textContent;
+        console.log(userSelection);
+    });
+    c.addEventListener("click", function () {
+        userSelection = c.textContent;
+        console.log(userSelection);
+    });
+    if (userSelection == quizQuestions[questNumber].answer) {
+        feedback.textContent = "Correct!";
+    } else {
+        score = score - 10;
+        feedback.textContent = "Incorrect!";
+    }
 }

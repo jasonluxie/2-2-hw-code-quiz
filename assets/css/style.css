@@ -1,0 +1,13 @@
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+
+#quiz-box {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
