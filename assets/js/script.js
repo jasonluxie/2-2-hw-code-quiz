@@ -9,8 +9,8 @@ let userChoice;
 let userSelection;
 let questNumber = -1;
 const feedback = document.querySelector("#feedback");
-let score;
 let time = 120000;
+let score;
 let tryAgainStatus = false;
 const quizQuestions = [
     {
@@ -70,7 +70,7 @@ function startGame() {
 
 function gameTimer() {
     //Timer function
-    setInterval(function () {
+    let gameTimer = setInterval(function () {
         if (time > 0) {
             time = time - 1000;
             let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
@@ -85,29 +85,19 @@ function gameTimer() {
                 location.reload();
             }
         }
+        if (tryAgainStatus == true) {
+            clearInterval(gameTimer);
+        }
     }, 1000);
 }
 
 function nextQuestion() {
-    // if (tryAgainStatus == true) {
-    //     title.className = "visible";
-    //     startGameButton.className = "visible";
-    //     questNumber = -1;
-    //     tryAgainStatus = false;
-    //     // // const title = quizBox.createElement("h1");
-    //     // // const startGameButton = quizBox.createElement("button");
-    //     // title.textContent = "Javascript Code Quiz";
-    //     // startGameButton.textContent = "Start Game";
-    //     // startGameButton.setAttribute("id", "start-game");
-    //     // const startGameButton = document.getElementById("start-game");
-    //     // startGameButton.addEventListener("click", startGame);} else
-
-    //If there are buttons in the container, changes the container into an empty string.
     if (choiceBox.childElementCount > 0) {
         choiceBox.innerHTML = "";
     }
     //If the array index number is the same as the
     if (questNumber + 1 === quizQuestions.length) {
+        score = time / 1000;
         choiceBox.innerHTML = "";
         hint.textContent =
             "You have finished taking the quiz and have a score of " + score;
@@ -115,6 +105,7 @@ function nextQuestion() {
         choiceBox.appendChild(playAgain);
         playAgain.textContent = "Play Again";
         tryAgainStatus = true;
+        // clearInterval(gameTimer)
         // playAgain.addEventListener("click", nextQuestion);
         playAgain.addEventListener("click", function () {
             location.reload();
@@ -137,38 +128,11 @@ function nextQuestion() {
 
 choiceBox.addEventListener("click", function (event) {
     let userClick = event.target;
-    console.log(event.target);
-    if (userClick.textContent == quizQuestions[questNumber-1].answer) {
-        feedback.textContent = "Correct!"
+    if (userClick.textContent == quizQuestions[questNumber - 1].answer) {
+        feedback.textContent = "Correct!";
         return;
     } else {
-        feedback.textContent = "Incorrect!"
+        feedback.textContent = "Incorrect!";
         time = time - 10000;
     }
-    console.log(userClick);
 });
-
-// function scoring() {
-//Add delegation
-// let a = document.getElementById("choice1");
-// let b = document.getElementById("choice2");
-// let c = document.getElementById("choice3");
-// a.addEventListener("click", function () {
-//     userSelection = a.textContent;
-//     console.log(userSelection);
-// });
-// b.addEventListener("click", function () {
-//     userSelection = b.textContent;
-//     console.log(userSelection);
-// });
-// c.addEventListener("click", function () {
-//     userSelection = c.textContent;
-//     console.log(userSelection);
-// });
-// if (userSelection == quizQuestions[questNumber].answer) {
-//     feedback.textContent = "Correct!";
-// } else {
-//     score = score - 10;
-//     feedback.textContent = "Incorrect!";
-// }
-// }
