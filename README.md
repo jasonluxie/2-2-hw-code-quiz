@@ -9,17 +9,16 @@
     1. Remove title element
     1. Remove start button
     1. Set textContent of <p> element to description of question.
-1. Change class of buttons so that they're showing 
-
-
-1. Click start button
-1. Timer starts, question and options shown
-1. After button click, show next question and buttons regardless of choice
-    1. Display correct/incorrect at bottom for 2 seconds
-    1. If incorrect, -10 seconds to time
-1. If all questions are answered, or if time = 0
-1. Show end screen with form and input
-
+    1. For loop which generates 3 buttons from the question
+1. On button click
+    1. Remove current buttons
+    1. set textContent of <p> to new question
+    1. Generate 3 new buttons
+    1. Remove time if question is wrong 
+1. After all questions have been answered
+    1. Show score and form input 
+    1. After form input, save score to local storage with initials
+    1. Show return to start button which resets all variables and rebuilds page 
 
 ## Your Task
 

@@ -8,6 +8,7 @@ const choiceBox = document.querySelector("#choice-box");
 let userChoice;
 let questNumber = -1;
 const feedback = document.querySelector("#feedback");
+let score = 0;
 const quizQuestions = [
     {
         question:
@@ -17,9 +18,9 @@ const quizQuestions = [
     },
     {
         question:
-            'A ________ is a set of statements which performs a task or calculates a value',
-        options: ['a: keydown','b: iteration','c: function'],
-        answer: 'function',
+            "A ________ is a set of statements which performs a task or calculates a value",
+        options: ["a: keydown", "b: iteration", "c: getElementById()"],
+        answer: "function",
     },
     // {
     //     question:
@@ -55,7 +56,7 @@ startGameButton.addEventListener("click", startGame);
 
 function bananaLog() {
     questNumber++;
-    console.log(questNumber)
+    console.log(questNumber);
     return console.log("banana");
 }
 
@@ -68,23 +69,22 @@ function startGame() {
 }
 
 function nextQuestion() {
-        questNumber++
-        hint.textContent = quizQuestions[questNumber].question;
-        for (let i = 0; i < quizQuestions[questNumber].options.length; i++) {
-            let userChoices = document.createElement("button");
-            choiceBox.appendChild(userChoices);
-            userChoices.setAttribute("id", "choice" + [i + 1]);
-            userChoices.textContent = quizQuestions[questNumber].options[i];
-            userChoices.addEventListener("click", nextQuestion);
-        }
+    questNumber++;
+    hint.textContent = quizQuestions[questNumber].question;
+    for (let i = 0; i < quizQuestions[questNumber].options.length; i++) {
+        let userChoices = document.createElement("button");
+        choiceBox.appendChild(userChoices);
+        userChoices.setAttribute("id", "choice" + [i + 1]);
+        userChoices.textContent = quizQuestions[questNumber].options[i];
+        userChoices.addEventListener("click", nextQuestion);
         if (choiceBox.childElementCount > 3) {
-            choiceBox.removeChild()
+            choiceBox.removeChild(userChoices);
+            console.log(choiceBox);
         }
+    }
 }
 
 function viewScores() {}
-
-let score = 0;
 
 function gameTimer() {
     let time = 6 * 30000;
