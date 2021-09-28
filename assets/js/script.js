@@ -129,7 +129,7 @@ function nextQuestion() {
         tryAgainStatus = true;
     }
     questNumber++;
-    show(feedback)
+    show(feedback);
     if (questNumber <= quizQuestions.length - 1) {
         for (let i = 0; i < quizQuestions[questNumber].options.length; i++) {
             hint.textContent = quizQuestions[questNumber].question;
@@ -148,12 +148,12 @@ function questionValidation(event) {
     let userClick = event.target;
     if (userClick.textContent == quizQuestions[questNumber - 1].answer) {
         feedback.textContent = "Correct!";
-        feedbackFade()
+        feedbackFade();
         return;
     } else {
         feedback.textContent = "Incorrect!";
         time = time - 20000;
-        feedbackFade()
+        feedbackFade();
     }
 }
 
@@ -180,8 +180,9 @@ function scoreRender() {
     title.textContent = "High Scores";
     hide(hint);
     hide(form);
-    clearInterval(gameTimer);
     show(localScores);
+    hide(startGameButton);
+    clearInterval(gameTimer);
     for (i = 0; i < userScores.length; i++) {
         localScores.textContent =
             "Intials:" +
