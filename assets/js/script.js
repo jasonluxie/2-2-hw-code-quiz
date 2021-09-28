@@ -15,7 +15,10 @@ let questNumber = -1;
 let time = 120000;
 let score;
 let tryAgainStatus = false;
-let highScores = [];
+if (JSON.parse(localStorage.getItem("highScore")) == null) {
+    var scoreArray = [];
+} else
+    var scoreArray = [].concat(JSON.parse(localStorage.getItem("highScore")));
 const quizQuestions = [
     {
         question:
@@ -136,9 +139,7 @@ function nextQuestion() {
             let userChoices = document.createElement("button");
             choiceBox.appendChild(userChoices);
             userChoices.setAttribute("id", "choice");
-            // userChoices.setAttribute("id", "choice" + [i + 1]);
             userChoices.textContent = quizQuestions[questNumber].options[i];
-            // userChoices.addEventListener("click", scoring);
             userChoices.addEventListener("click", nextQuestion);
         }
     }
@@ -152,7 +153,7 @@ function questionValidation(event) {
         return;
     } else {
         feedback.textContent = "Incorrect!";
-        time = time - 20000;
+        time = time - 15000;
         feedbackFade();
     }
 }
@@ -163,34 +164,35 @@ function scoreSubmit(event) {
         initial: formInitials.value,
         highScore: score,
     };
-    highScores.push(savedScore);
-    localStorage.setItem("highScore", JSON.stringify(highScores));
+    scoreArray.push(savedScore);
+    localStorage.setItem("highScore", JSON.stringify(scoreArray));
     formInitials.value = "";
     scoreRender();
 }
 
 function scoreRender() {
-    let userScores = JSON.parse(localStorage.getItem("highScore"));
+    title.textContent = "High Scores";
+    clearInterval(gameTimer);
     let playAgain = document.createElement("button");
-    console.log(userScores);
     if (playAgainButton.childElementCount < 1) {
         playAgainButton.appendChild(playAgain);
         playAgain.textContent = "Play Again";
     }
-    title.textContent = "High Scores";
     hide(hint);
     hide(form);
-    show(localScores);
     hide(startGameButton);
-    clearInterval(gameTimer);
-    for (i = 0; i < userScores.length; i++) {
-        localScores.textContent =
-            "Intials:" +
-            userScores[i].initial +
-            " Score: " +
-            userScores[i].highScore;
+    show(localScores);
+    if (localScores.childElementCount == 0) {
+        for (i = 0; i < scoreArray.length; i++) {
+            let userScore = document.createElement("li");
+            userScore.textContent =
+                "Intials:" +
+                scoreArray[i].initial +
+                " Score: " +
+                scoreArray[i].highScore;
+            localScores.appendChild(userScore);
+        }
     }
-    playAgain.addEventListener("click", nextQuestion);
     playAgain.addEventListener("click", function () {
         location.reload();
     });
