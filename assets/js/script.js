@@ -181,6 +181,7 @@ function scoreRender() {
     hide(hint);
     hide(form);
     hide(startGameButton);
+    hide(choiceBox);
     show(localScores);
     if (localScores.childElementCount == 0) {
         for (i = 0; i < scoreArray.length; i++) {
