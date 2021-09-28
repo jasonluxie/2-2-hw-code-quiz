@@ -8,15 +8,15 @@ https://jasonluxie.github.io/2-2-hw-code-quiz/
 ## Application Demonstration
 Application shows description and play again button on load. View scores is always present and exits the game.
 
-<kbd>![Landing Page for Code Quiz](assets\images\1-landing-page.png)</kbd>
+<kbd>![Landing Page for Code Quiz](.\assets\images\1-landing-page.png)</kbd>
 
 After starting the game, quiz question/prompt is loaded and multiple choice options are presented. 
 
-<kbd>![Quiz prompt with multiple choice answers](assets\images\2-quiz-items.png)</kbd>
+<kbd>![Quiz prompt with multiple choice answers](.\assets\images\2-quiz-items.png)</kbd>
 
 High score screen with play again button.
 
-<kbd>![High Score Screen](assets\images\3-high-scores.png)</kbd>
+<kbd>![High Score Screen](.\assets\images\3-high-scores.png)</kbd>
 
 ## Logic
 1. On page load, show title, &lt;p>description, and button to start game. 
