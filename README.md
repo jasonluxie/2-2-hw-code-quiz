@@ -34,3 +34,7 @@ High score screen with play again button.
     1. Show score and form input 
     1. After form input, save score to local storage with initials
     1. Show return to start button which resets all variables and rebuilds page 
+
+## Notes
+* Hidden HTML elements have their position set to absolute so that they do not show as empty boxes when hidden. 
+* High scores are stored as local storage. 
