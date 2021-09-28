@@ -188,9 +188,8 @@ function scoreRender() {
         for (i = 0; i < scoreArray.length; i++) {
             let userScore = document.createElement("li");
             userScore.textContent =
-                // "Intials:" +
                 scoreArray[i].initial +
-                " Score: " +
+                " - Score: " +
                 scoreArray[i].highScore;
             localScores.appendChild(userScore);
         }
