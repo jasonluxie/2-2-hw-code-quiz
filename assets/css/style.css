@@ -1,5 +1,12 @@
+* {
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-family: 'Poppins', sans-serif;
+    border:none;
+}
 .hidden {
     visibility: hidden;
+    position: absolute;
 }
 
 .visible {
@@ -10,14 +17,19 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 98%;
-
+    width: 95%;
+    margin: 0 auto;
+}
+#title {
+    font-size: 2rem;
+}
+#container {
+    position: relative;
 }
 
 #quiz-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 60%;
+    margin: 0 auto;
 }
 
 #choice-box {
@@ -25,6 +37,45 @@ header {
     flex-direction: column;
 }
 
+#view-score {
+    display: inline-block;
+    width: fit-content;
+    background-color: white;
+    text-decoration: underline;
+    color: grey;
+}
+
+#view-score:hover{
+    color:red;
+}
+
+button {
+    width: fit-content;
+    background-color: purple;
+    color: white;
+    text-align: left;
+    padding: 0 1rem;
+}
+
+
+#feedback {
+    color:grey
+}
+
+#submit {
+    background-color: purple;
+    color: white;
+    padding: 0 1rem;
+}
+
+#name {
+    border: 2px solid lightgray;
+}
+
 form {
     margin-top: 1rem;
+}
+
+li {
+    list-style-type: none;
 }

@@ -183,11 +183,12 @@ function scoreRender() {
     hide(startGameButton);
     hide(choiceBox);
     show(localScores);
-    if (localScores.childElementCount == 0) {
+    show(title)
+    if (localScores.childElementCount <= 0) {
         for (i = 0; i < scoreArray.length; i++) {
             let userScore = document.createElement("li");
             userScore.textContent =
-                "Intials:" +
+                // "Intials:" +
                 scoreArray[i].initial +
                 " Score: " +
                 scoreArray[i].highScore;

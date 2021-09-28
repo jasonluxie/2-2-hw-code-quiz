@@ -7,47 +7,41 @@
         <title>Code Quiz</title>
         <link rel="stylesheet" href="./assets/css/reset.css" />
         <link rel="stylesheet" href="./assets/css/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+            href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
             rel="stylesheet"
-            integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
-            crossorigin="anonymous"
         />
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-            crossorigin="anonymous"
-            defer
-        ></script>
     </head>
     <body>
         <header>
             <button id="view-score">View scores</button>
             <div id="timer"></div>
         </header>
-        <body id="quiz-box">
-            <h1 id="title">Javascript Code Quiz</h1>
-            <p id="question">
-                Welcome! Press "Start Game" to begin the quiz. Each correct
-                question will give you a point, try to get all the questions
-                correct!
-            </p>
-            <div id="banana"></div>
-            <button id="start-game">Start Game</button>
-            <div id="choice-box"></div>
-            <form class="hidden">
-                <input
-                    type="text"
-                    placeholder="Enter your initials"
-                    id="name"
-                />
-                <input type="submit" value="Submit Score" />
-            </form>
-            <div id="feedback"></div>
-            <ul class="hidden" id="local-scores"></ul>
-            <div id="play-again"></div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <script src="./assets/js/script.js"></script>
-        </body>
+        <section class="container">
+            <div id="quiz-box">
+                <h1 id="title">Javascript Code Quiz</h1>
+                <p id="question">
+                    Welcome! Press "Start Game" to begin the quiz. Each wrong answer will take 30 points from your total score! Try to get all the questions correct!
+                </p>
+                <div id="banana"></div>
+                <button id="start-game">Start Game</button>
+                <div id="choice-box"></div>
+                <form class="hidden">
+                    <input
+                        type="text"
+                        placeholder="Enter your initials"
+                        id="name"
+                        required
+                    />
+                    <input id="submit" type="submit" value="Submit Score" />
+                </form>
+                <div id="feedback"></div>
+                <ul class="hidden" id="local-scores"></ul>
+                <div id="play-again"></div>
+                <script src="./assets/js/script.js"></script>
+            </div>
+        </section>
     </body>
 </html>
