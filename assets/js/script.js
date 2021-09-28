@@ -5,14 +5,17 @@ const title = document.querySelector("#title");
 const hint = document.querySelector("#question");
 const startGameButton = document.getElementById("start-game");
 const choiceBox = document.querySelector("#choice-box");
-const form = document.querySelector("form")
-let userChoice;
-let userSelection;
-let questNumber = -1;
+const form = document.querySelector("form");
+const formInitials = document.getElementById("name");
 const feedback = document.querySelector("#feedback");
+const playAgainButton = document.getElementById("play-again");
+const localScores = document.getElementById("local-scores");
+let userChoice;
+let questNumber = -1;
 let time = 120000;
 let score;
 let tryAgainStatus = false;
+let highScores = [];
 const quizQuestions = [
     {
         question:
@@ -57,14 +60,25 @@ const quizQuestions = [
 ];
 
 startGameButton.addEventListener("click", startGame);
+viewScore.addEventListener("click", scoreRender);
+choiceBox.addEventListener("click", questionValidation);
+form.addEventListener("submit", scoreSubmit);
+
+function hide(target) {
+    target.className = "hidden";
+}
+
+function show(target) {
+    target.className = "visible";
+}
 
 function bananaLog() {
     return console.log("banana");
 }
 
 function startGame() {
-    title.className = "hidden";
-    startGameButton.className = "hidden";
+    hide(title);
+    hide(startGameButton);
     gameTimer();
     nextQuestion();
 }
@@ -92,6 +106,12 @@ function gameTimer() {
     }, 1000);
 }
 
+function feedbackFade() {
+    setInterval(function () {
+        hide(feedback);
+    }, 1500);
+}
+
 function nextQuestion() {
     if (choiceBox.childElementCount > 0) {
         choiceBox.innerHTML = "";
@@ -100,22 +120,16 @@ function nextQuestion() {
     if (questNumber + 1 === quizQuestions.length) {
         score = time / 1000;
         choiceBox.innerHTML = "";
-        title.className = "visible";
+        show(title);
+        // title.className = "visible";
         title.textContent = "All Done!";
         hint.textContent =
             "You have finished taking the quiz and have a score of " + score;
-        form.className = "visible"
-        // let playAgain = document.createElement("button");
-        // choiceBox.appendChild(playAgain);
-        // playAgain.textContent = "Play Again";
-        // tryAgainStatus = true;
-        // clearInterval(gameTimer)
-        // playAgain.addEventListener("click", nextQuestion);
-        // playAgain.addEventListener("click", function () {
-        //     location.reload();
-        // });
+        show(form);
+        tryAgainStatus = true;
     }
     questNumber++;
+    show(feedback)
     if (questNumber <= quizQuestions.length - 1) {
         for (let i = 0; i < quizQuestions[questNumber].options.length; i++) {
             hint.textContent = quizQuestions[questNumber].question;
@@ -130,13 +144,53 @@ function nextQuestion() {
     }
 }
 
-choiceBox.addEventListener("click", function (event) {
+function questionValidation(event) {
     let userClick = event.target;
     if (userClick.textContent == quizQuestions[questNumber - 1].answer) {
         feedback.textContent = "Correct!";
+        feedbackFade()
         return;
     } else {
         feedback.textContent = "Incorrect!";
-        time = time - 10000;
+        time = time - 20000;
+        feedbackFade()
     }
-});
+}
+
+function scoreSubmit(event) {
+    event.preventDefault();
+    let savedScore = {
+        initial: formInitials.value,
+        highScore: score,
+    };
+    highScores.push(savedScore);
+    localStorage.setItem("highScore", JSON.stringify(highScores));
+    formInitials.value = "";
+    scoreRender();
+}
+
+function scoreRender() {
+    let userScores = JSON.parse(localStorage.getItem("highScore"));
+    let playAgain = document.createElement("button");
+    console.log(userScores);
+    if (playAgainButton.childElementCount < 1) {
+        playAgainButton.appendChild(playAgain);
+        playAgain.textContent = "Play Again";
+    }
+    title.textContent = "High Scores";
+    hide(hint);
+    hide(form);
+    clearInterval(gameTimer);
+    show(localScores);
+    for (i = 0; i < userScores.length; i++) {
+        localScores.textContent =
+            "Intials:" +
+            userScores[i].initial +
+            " Score: " +
+            userScores[i].highScore;
+    }
+    playAgain.addEventListener("click", nextQuestion);
+    playAgain.addEventListener("click", function () {
+        location.reload();
+    });
+}
