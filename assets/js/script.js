@@ -61,7 +61,7 @@ const quizQuestions = [
         answer: "c: object",
     },
 ];
-
+shuffleArray(quizQuestions)
 startGameButton.addEventListener("click", startGame);
 viewScore.addEventListener("click", scoreRender);
 choiceBox.addEventListener("click", questionValidation);
@@ -197,4 +197,11 @@ function scoreRender() {
     playAgain.addEventListener("click", function () {
         location.reload();
     });
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
