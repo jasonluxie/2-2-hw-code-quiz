@@ -1,6 +1,6 @@
 # 2-2-hw-code-quiz
 
-# 04 Web APIs: Code Quiz
+## Description
 
 ## Logic
 

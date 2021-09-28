@@ -10,6 +10,7 @@ const formInitials = document.getElementById("name");
 const feedback = document.querySelector("#feedback");
 const playAgainButton = document.getElementById("play-again");
 const localScores = document.getElementById("local-scores");
+
 let userChoice;
 let questNumber = -1;
 let time = 120000;
@@ -61,12 +62,11 @@ const quizQuestions = [
         answer: "c: object",
     },
 ];
-shuffleArray(quizQuestions)
+shuffleArray(quizQuestions);
 startGameButton.addEventListener("click", startGame);
 viewScore.addEventListener("click", scoreRender);
 choiceBox.addEventListener("click", questionValidation);
 form.addEventListener("submit", scoreSubmit);
-
 function hide(target) {
     target.className = "hidden";
 }
